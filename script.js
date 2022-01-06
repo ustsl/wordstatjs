@@ -9,9 +9,12 @@ window.addEventListener('DOMContentLoaded', () => {
         select = document.getElementById('exampleFormControlSelect1');
 
 
+    //Функции обработки формы
+
     function plusReplacer(txt) {
         txt = txt.replace('+', '');
         txt = txt.replace('+', '');
+        txt = txt.replace('\t', '');
         return txt;
     }
 
@@ -38,7 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        return txt += '<br>';
+        return txt += '\n';
     }
 
 
@@ -61,14 +64,21 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
+    //Обработка события формы
+
     button.onclick = function() {
         let textForm = textArea.value;
-        console.log(select.selectedIndex);
-        console.log(finalContent);
         let finalData = showContent(textForm, select.selectedIndex);
+
         if (finalData.length > 1) {
-            finalContent.innerHTML = `<strong>Скопируйте результат</strong><br><br>
-            ${finalData}`;
+            finalContent.innerHTML = `<div id="copy-result"><strong>Скопируйте результат</strong></div><br>
+            <div id="finalkeys">
+            <textarea class="form-control" id="resultForm" rows="28">${finalData}</textarea>
+            </div>
+            `;
+
+
         } else {
             finalContent.innerHTML = `
             <div class="alert alert-danger" role="alert">
